@@ -16,11 +16,7 @@ class MainActivity: Activity() {
         finish()
 
         if (isRooted()) {
-            val screenOffProcess = ProcessBuilder("su", "-c",
-                "echo 0 > /sys/class/backlight/panel0-backlight/brightness").start()
-            screenOffProcess.waitFor()
-
-            if (screenOffProcess.exitValue() != 0)
+            if (panelOff() != 0)
                 Toast.makeText(this, "Root permissions denied. Exiting.", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "Device not rooted. Exiting.", Toast.LENGTH_SHORT).show()
