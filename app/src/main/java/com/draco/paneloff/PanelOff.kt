@@ -3,7 +3,7 @@ package com.draco.paneloff
 fun panelOff(): Int {
      val screenOffProcess = ProcessBuilder(
             "su", "-c",
-            "echo 0 > /sys/class/backlight/panel0-backlight/brightness"
+            "for i in /sys/class/backlight/*/brightness; do echo 0 > \"\$i\"; done"
         ).start()
 
     screenOffProcess.waitFor()
